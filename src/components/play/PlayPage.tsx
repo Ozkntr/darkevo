@@ -72,7 +72,7 @@ export function PlayPage() {
         {sent ? (
           <p className="form-success">{t("play.submitted")}</p>
         ) : (
-          <form className="panel-form" onSubmit={onSubmit}>
+          <form className="panel-form" method="post" action="#kayit" onSubmit={onSubmit}>
             <label>
               {t("play.username")}
               <input name="username" required autoComplete="username" minLength={3} />

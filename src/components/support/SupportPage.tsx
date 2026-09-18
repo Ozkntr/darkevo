@@ -45,7 +45,7 @@ function ContactForm() {
   }
 
   return (
-    <form className="panel-form" onSubmit={onSubmit}>
+    <form className="panel-form" method="post" action="#iletisim" onSubmit={onSubmit}>
       <label>
         {t("support.contactName")}
         <input name="name" required autoComplete="name" />
@@ -116,7 +116,7 @@ function SupportArticle({ slug }: { slug: SupportSlug }) {
 
       {slug === "iletisim" ? (
         <>
-          <h1>{t("support.contactTitle")}</h1>
+          <h1 id="iletisim">{t("support.contactTitle")}</h1>
           <p className="lead">{t("support.contactLead")}</p>
           <ContactForm />
         </>

@@ -516,6 +516,15 @@ h1 {
   display: grid;
   gap: 0.9rem;
   max-width: 32rem;
+  margin-top: 1rem;
+}
+
+.tips {
+  padding-left: 1.2rem;
+}
+
+.page-shell section + section {
+  margin-top: 2.75rem;
 }
 
 .panel-form label {
