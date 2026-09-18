@@ -2,12 +2,17 @@
 
 import Link from "next/link";
 import { FormEvent, useState } from "react";
+import { LoginForm } from "@/components/auth/LoginForm";
+import { useAuth } from "@/components/auth/AuthProvider";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import type { SupportSlug } from "@/lib/content";
+import { outboundProps, SITE_LINKS } from "@/lib/site-links";
+import { SupportTicketsPanel } from "./SupportTicketsPanel";
 
 const SUPPORT_NAV: { slug: SupportSlug; labelKey: string }[] = [
   { slug: "sss", labelKey: "nav.supportFaq" },
   { slug: "kurallar", labelKey: "nav.supportRules" },
+  { slug: "talep", labelKey: "nav.supportTicket" },
   { slug: "iletisim", labelKey: "nav.supportContact" },
 ];
 
@@ -74,6 +79,26 @@ function ContactForm() {
   );
 }
 
+function TicketGate() {
+  const { t } = useLocale();
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return <p className="hint">{t("auth.pleaseWait")}</p>;
+  }
+
+  if (!user) {
+    return (
+      <>
+        <p className="lead">{t("support.ticketLoginLead")}</p>
+        <LoginForm />
+      </>
+    );
+  }
+
+  return <SupportTicketsPanel />;
+}
+
 function SupportArticle({ slug }: { slug: SupportSlug }) {
   const { t } = useLocale();
 
@@ -114,10 +139,20 @@ function SupportArticle({ slug }: { slug: SupportSlug }) {
         </>
       ) : null}
 
+      {slug === "talep" ? (
+        <>
+          <h1>{t("support.ticketTitle")}</h1>
+          <TicketGate />
+        </>
+      ) : null}
+
       {slug === "iletisim" ? (
         <>
           <h1 id="iletisim">{t("support.contactTitle")}</h1>
           <p className="lead">{t("support.contactLead")}</p>
+          <a className="ghost-btn" href={SITE_LINKS.discord} {...outboundProps(SITE_LINKS.discord)}>
+            {t("support.discordCta")}
+          </a>
           <ContactForm />
         </>
       ) : null}

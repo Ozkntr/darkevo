@@ -5,6 +5,7 @@ import { SkipLink } from "@/components/i18n/SkipLink";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import "./globals.css";
+import "./wiki.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "tr_TR",
-    alternateLocale: ["en_US"],
+    alternateLocale: ["en_US", "de_DE"],
     url: siteUrl,
     siteName: "Darkevo",
     title: "Darkevo",

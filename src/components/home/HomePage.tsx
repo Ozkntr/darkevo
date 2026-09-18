@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useLocale } from "@/components/i18n/LocaleProvider";
+import { outboundProps, SITE_LINKS } from "@/lib/site-links";
 
 export function HomePage() {
   const { t } = useLocale();
@@ -31,6 +32,9 @@ export function HomePage() {
             <Link href="/oyna" className="play-btn play-btn--lg">
               {t("home.ctaPlay")}
             </Link>
+            <a className="ghost-btn" href={SITE_LINKS.discord} {...outboundProps(SITE_LINKS.discord)}>
+              {t("home.ctaDiscord")}
+            </a>
             <Link href="/wiki" className="ghost-btn">
               {t("home.ctaWiki")}
             </Link>

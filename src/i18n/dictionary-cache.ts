@@ -16,6 +16,11 @@ export async function loadDictionary(locale: AppLocale): Promise<AppDictionary> 
     cache.en = mod.default;
     return mod.default;
   }
+  if (locale === "de") {
+    const mod = await import("./dictionaries.de");
+    cache.de = mod.default;
+    return mod.default;
+  }
   cache.tr = tr;
   return tr;
 }

@@ -47,9 +47,28 @@ function FlagUsa({ className }: { className?: string }) {
   );
 }
 
+function FlagGermany({ className }: { className?: string }) {
+  const clipId = `de-flag-${useId().replace(/:/g, "")}`;
+  return (
+    <svg viewBox="0 0 60 40" className={className} aria-hidden>
+      <defs>
+        <clipPath id={clipId}>
+          <rect width="60" height="40" rx="3" ry="3" />
+        </clipPath>
+      </defs>
+      <g clipPath={`url(#${clipId})`}>
+        <rect width="60" height="13.4" fill="#000" />
+        <rect y="13.3" width="60" height="13.4" fill="#DD0000" />
+        <rect y="26.6" width="60" height="13.4" fill="#FFCE00" />
+      </g>
+    </svg>
+  );
+}
+
 const OPTIONS: { locale: AppLocale; Flag: typeof FlagTurkey; shortKey: string; nameKey: string }[] = [
   { locale: "tr", Flag: FlagTurkey, shortKey: "language.turkishShort", nameKey: "language.optionTurkish" },
   { locale: "en", Flag: FlagUsa, shortKey: "language.englishShort", nameKey: "language.optionEnglish" },
+  { locale: "de", Flag: FlagGermany, shortKey: "language.germanShort", nameKey: "language.optionGerman" },
 ];
 
 export function LanguageSwitcher() {

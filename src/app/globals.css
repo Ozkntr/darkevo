@@ -180,6 +180,28 @@ a {
   gap: 0.65rem;
 }
 
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border: 1px solid #2a2a2e;
+  border-radius: 0.55rem;
+  background: #161618;
+  color: #c9c8ff;
+}
+
+.icon-btn:hover {
+  border-color: #5865f2;
+  color: #fff;
+}
+
+.icon-btn svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
 .lang-switcher {
   position: relative;
 }
@@ -221,7 +243,7 @@ a {
   position: absolute;
   right: 0;
   top: calc(100% + 8px);
-  min-width: 160px;
+  min-width: 188px;
   background: #141416;
   border: 1px solid var(--line);
   border-radius: 0.6rem;
@@ -464,8 +486,12 @@ h1 {
   font-size: 0.78rem;
 }
 
+.article .ghost-btn {
+  margin: 0.4rem 0 1.2rem;
+}
+
 .news-card a,
-.article a {
+.article a:not(.ghost-btn):not(.play-btn) {
   color: var(--gold);
   display: inline-block;
   margin-top: 0.8rem;
@@ -545,8 +571,68 @@ h1 {
   font: inherit;
 }
 
-.form-success {
-  color: #b6e2c4;
+.form-error {
+  color: #f0a3a0;
+  margin: 0;
+}
+
+.ghost-btn--compact {
+  padding: 0.45rem 0.75rem;
+  font-size: 0.78rem;
+}
+
+.auth-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.auth-status__name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--gold);
+  max-width: 9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ticket-list {
+  margin-top: 2.5rem;
+}
+
+.ticket-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.ticket-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  padding: 1rem 1.1rem;
+}
+
+.ticket-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+  margin-bottom: 0.55rem;
+  color: var(--gold);
+  font-size: 0.82rem;
+}
+
+.ticket-card p {
+  margin: 0;
+  color: #d4cec4;
+  white-space: pre-wrap;
+}
+
+.panel-form button:disabled {
+  opacity: 0.65;
+  cursor: wait;
 }
 
 .hint {
@@ -595,7 +681,20 @@ th {
 
 .site-footer__nav {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
+  align-items: center;
+}
+
+.site-footer__discord {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.site-footer__discord svg {
+  width: 1rem;
+  height: 1rem;
 }
 
 .site-footer__copy {
@@ -636,5 +735,224 @@ th {
 @media (min-width: 1100px) {
   .brand__name {
     display: inline;
+  }
+}
+
+/* —— Seviye sistemi wiki —— */
+.levels__intro {
+  margin-bottom: 2rem;
+}
+
+.levels .wiki-section + .wiki-section {
+  margin-top: 0;
+}
+
+.levels__milestones.wiki-section,
+.levels__table-wrap.wiki-section {
+  margin-top: 0;
+}
+
+.levels__milestones h2,
+.levels__table-wrap h2 {
+  margin-bottom: 1rem;
+}
+
+.levels__milestone-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.levels__milestone {
+  border: 1px solid var(--line);
+  background: var(--bg-soft);
+  padding: 1.2rem 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.levels__milestone::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+}
+
+.levels__milestone--star {
+  border-color: rgba(74, 222, 128, 0.35);
+  background: linear-gradient(135deg, rgba(22, 101, 52, 0.28), var(--bg-soft));
+}
+.levels__milestone--star::before { background: #4ade80; }
+.levels__milestone--star .levels__milestone-icon,
+.levels__milestone--star h3 { color: #86efac; }
+
+.levels__milestone--space {
+  border-color: rgba(96, 165, 250, 0.35);
+  background: linear-gradient(135deg, rgba(30, 64, 175, 0.3), var(--bg-soft));
+}
+.levels__milestone--space::before { background: #60a5fa; }
+.levels__milestone--space .levels__milestone-icon,
+.levels__milestone--space h3 { color: #93c5fd; }
+
+.levels__milestone--hunter {
+  border-color: rgba(192, 132, 252, 0.35);
+  background: linear-gradient(135deg, rgba(88, 28, 135, 0.32), var(--bg-soft));
+}
+.levels__milestone--hunter::before { background: #c084fc; }
+.levels__milestone--hunter .levels__milestone-icon,
+.levels__milestone--hunter h3 { color: #d8b4fe; }
+
+.levels__milestone--warrior {
+  border-color: rgba(248, 113, 113, 0.35);
+  background: linear-gradient(135deg, rgba(127, 29, 29, 0.35), var(--bg-soft));
+}
+.levels__milestone--warrior::before { background: #f87171; }
+.levels__milestone--warrior .levels__milestone-icon,
+.levels__milestone--warrior h3 { color: #fca5a5; }
+
+.levels__milestone--legend {
+  border-color: rgba(250, 204, 21, 0.4);
+  background: linear-gradient(135deg, rgba(113, 63, 18, 0.4), var(--bg-soft));
+}
+.levels__milestone--legend::before { background: #facc15; }
+.levels__milestone--legend .levels__milestone-icon,
+.levels__milestone--legend h3 { color: #fde68a; }
+
+.levels__milestone-icon {
+  width: 2.2rem;
+  height: 2.2rem;
+  margin-bottom: 0.7rem;
+}
+
+.levels__milestone-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.levels__milestone-level {
+  margin: 0 0 0.35rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.levels__milestone h3 {
+  margin: 0 0 0.55rem;
+  font-size: 1.15rem;
+}
+
+.levels__milestone p {
+  margin: 0;
+  color: #cfc8bc;
+  line-height: 1.55;
+}
+
+.levels__milestone-exp {
+  margin-top: 0.85rem !important;
+  font-size: 0.86rem;
+  color: var(--gold) !important;
+}
+
+.levels__table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(800px 200px at 50% 0%, rgba(56, 120, 180, 0.12), transparent 60%),
+    #0b0f14;
+}
+
+.levels__table {
+  width: 100%;
+  min-width: 920px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.levels__table th {
+  position: sticky;
+  top: 0;
+  background: #122033;
+  color: #f0c75e;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  padding: 0.85rem 0.75rem;
+  border-bottom: 1px solid rgba(96, 165, 250, 0.25);
+  white-space: nowrap;
+}
+
+.levels__table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: #d7dde8;
+  vertical-align: middle;
+}
+
+.levels__table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.levels__badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2rem;
+  height: 2rem;
+  border-radius: 0.4rem;
+  background: #172536;
+  border: 1px solid rgba(96, 165, 250, 0.25);
+  font-weight: 700;
+  color: #e8eef8;
+}
+
+.levels__exp {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: #9ec5ff;
+}
+
+.levels__dash {
+  color: var(--muted);
+}
+
+.levels__title {
+  display: inline-block;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+.levels__title--star { color: #86efac; }
+.levels__title--space { color: #93c5fd; }
+.levels__title--hunter { color: #d8b4fe; }
+.levels__title--warrior { color: #fca5a5; }
+.levels__title--legend { color: #fde68a; }
+
+.levels__table tr.is-star {
+  background: rgba(22, 101, 52, 0.22);
+}
+.levels__table tr.is-space {
+  background: rgba(30, 64, 175, 0.22);
+}
+.levels__table tr.is-hunter {
+  background: rgba(88, 28, 135, 0.24);
+}
+.levels__table tr.is-warrior {
+  background: rgba(127, 29, 29, 0.25);
+}
+.levels__table tr.is-legend {
+  background: rgba(113, 63, 18, 0.3);
+}
+
+@media (min-width: 800px) {
+  .levels__milestone-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .levels__milestone-grid {
+    grid-template-columns: repeat(5, 1fr);
   }
 }

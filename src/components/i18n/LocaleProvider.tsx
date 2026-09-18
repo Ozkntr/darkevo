@@ -14,6 +14,7 @@ import {
   defaultLocale,
   isAppLocale,
   localeHtmlLang,
+  locales,
   LOCALE_STORAGE_KEY,
   type AppLocale,
 } from "@/i18n/locales";
@@ -34,24 +35,26 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   const loadGenRef = useRef(0);
 
   useEffect(() => {
-    const id = window.requestAnimationFrame(() => {
-      void (async () => {
-        try {
-          const raw = localStorage.getItem(LOCALE_STORAGE_KEY);
-          if (isAppLocale(raw) && raw !== defaultLocale) {
-            setIsLocaleLoading(true);
-            await loadDictionary(raw);
-            setLocaleState(raw);
-          }
-        } catch {
-          /* private mode */
-        } finally {
+    let cancelled = false;
+    void (async () => {
+      try {
+        const raw = localStorage.getItem(LOCALE_STORAGE_KEY);
+        if (cancelled || !isAppLocale(raw) || raw === defaultLocale) return;
+        setIsLocaleLoading(true);
+        await loadDictionary(raw);
+        if (!cancelled) setLocaleState(raw);
+      } catch {
+        /* private mode */
+      } finally {
+        if (!cancelled) {
           storageHydratedRef.current = true;
           setIsLocaleLoading(false);
         }
-      })();
-    });
-    return () => window.cancelAnimationFrame(id);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   useEffect(() => {
@@ -65,10 +68,10 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   }, [locale]);
 
   useEffect(() => {
-    const other: AppLocale = locale === "tr" ? "en" : "tr";
+    const others = locales.filter((item) => item !== locale);
     const ric = window.requestIdleCallback?.bind(window);
     const run = () => {
-      void loadDictionary(other);
+      for (const item of others) void loadDictionary(item);
     };
     if (ric) {
       const id = ric(run, { timeout: 4000 });
